@@ -46,11 +46,11 @@ def encrypt_vigenere_v2(key,plaintext,alphabet):
         elif c in alphabet:
             cipher_text.append(vigenere_index_v2(key[counter % len(key)],c,alphabet))
             counter += 1
-    print(cipher_text)
+    #print(cipher_text)
     return "".join(cipher_text)
 
 def non_vigenere_index_v2(key_letter, cipher_text, alphabet):
-    print(len(alphabet))
+    #print(len(alphabet))
     return index_to_letter_v1(
         (letter_to_index_v2(cipher_text,alphabet) -
         letter_to_index_v2(key_letter,alphabet) + len(alphabet)) % len(alphabet),
@@ -67,7 +67,7 @@ def decrypt(key,cipher_text,alphabet):
         elif c in alphabet:
             plaintext.append(non_vigenere_index_v2(key[counter % len(key)], c , alphabet))
             counter += 1
-    print(plaintext)
+    #print(plaintext)
     return "".join(plaintext)
 
 alphabet = "abcdefghijklmnopqrstuvwxyz"
