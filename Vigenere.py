@@ -50,7 +50,7 @@ def encrypt_vigenere_v2(key,plaintext,alphabet):
     return "".join(cipher_text)
 
 def non_vigenere_index_v2(key_letter, cipher_text, alphabet):
-    #print(len(alphabet))
+    #print(len(alphabet)) :3
     return index_to_letter_v1(
         (letter_to_index_v2(cipher_text,alphabet) -
         letter_to_index_v2(key_letter,alphabet) + len(alphabet)) % len(alphabet),
