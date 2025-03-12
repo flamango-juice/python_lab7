@@ -1,3 +1,5 @@
+from sys import exit
+
 def vigenere_head(alphabet:str):
     return list(" ") + list(alphabet)
 
@@ -70,12 +72,43 @@ def decrypt(key,cipher_text,alphabet):
     #print(plaintext)
     return "".join(plaintext)
 
-alphabet = "abcdefghijklmnopqrstuvwxyz"
-square = vigenere_sq(alphabet)
+def enc_menu(key,alphabet,encrypt_list):
+    plaintext = input("Enter text to encrypt: ")
+    encrypt_list.append(encrypt_vigenere_v2(key,plaintext,alphabet))
 
-key = "bluesmurf"
-plaintext = "One small step for man, one giant leap for mankind."
-cipher = encrypt_vigenere_v2(key.lower(),plaintext.lower(),alphabet)
-print(cipher)
-print("-")
-print(decrypt(key,cipher,alphabet))
+def dec_menu(key,alphabet,encrypt_list):
+    results = []
+    for cipher_text in encrypt_list:
+        results.append(decrypt(key,cipher_text,alphabet))
+    return results
+
+def dec_dump(encrypt_list):
+    return encrypt_list
+
+def main():
+    encrypt_list = []
+    key = "bluesmurf"
+    alphabet = "abcdefghijklmnopqrstuvwxyz"
+    message = "one small step for man, one giant leap for mankind"
+    menu = [
+        ["1) Encrypt", enc_menu, [key, alphabet,encrypt_list]], # LIST IN A LIST !!!!!!!!!!!!!!!
+        ["2) Decrypt", dec_menu, [key,alphabet,encrypt_list]],
+        ["3) Dump Decrypt", dec_dump, [encrypt_list]],
+        ["4) Quit", exit, [0]]
+    ]
+    while True:
+        for menu_item in menu:
+            print(menu_item[0])
+
+        try:
+            choice = int(input("Make your choice"))
+            if not (0 < choice <= len(menu)):
+                print("Must be between 0 and 5")
+            else:
+                result = menu[choice-1][1](*menu[choice-1][2])
+                if result: print(result)
+        except ValueError as ignored:
+            print("must be int")
+
+if __name__ == "__main__":
+    main()
